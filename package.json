@@ -1,0 +1,15 @@
+{
+  "name": "lb-testing-javascript",
+  "version": "1.0.0",
+  "description": "Example of Javascript tests to facilitate my research",
+  "main": "add.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^11.7.2"
+  }
+}
