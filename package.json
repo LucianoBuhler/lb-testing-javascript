@@ -4,12 +4,14 @@
   "description": "Example of Javascript tests to facilitate my research",
   "main": "add.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:coverage": "nyc mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^11.7.2"
+    "mocha": "^11.7.2",
+    "nyc": "^17.1.0"
   }
 }
