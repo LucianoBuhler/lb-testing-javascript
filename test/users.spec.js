@@ -2,7 +2,6 @@ const {
   getAllUsers,
   findUserById,
   findUserByEmail } = require('../users');
-const assert = require('assert');
 
 // using async/await here
 describe('the getAllUsers function', () => {
@@ -10,7 +9,7 @@ describe('the getAllUsers function', () => {
     const users = await getAllUsers();
     const expectedMessage = 'Users retrieved successfully';
 
-    assert.equal(users.message, expectedMessage)
+    expect(users.message).toBe(expectedMessage)
   })
 })
 
@@ -21,10 +20,20 @@ describe('the findUserById function', () => {
     return findUserById(2).then(response => {
       const expectedMessage = 'User with id: 2 was found successfully';
   
-      assert.equal(response.message, expectedMessage);
-      assert.equal(response.data.id, 2);
-      assert.equal(response.data.name, 'peter Duck');
+      expect(response.message).toBe(expectedMessage);
+      expect(response.data.id).toBe(2);
+      expect(response.data.name).toBe('peter Duck');
     })
+  })
+
+  it('should rejects with error if user id was not found', () => {
+    const id = 999;
+    const user = findUserById(id)
+    
+    // expect(user).rejects.toEqual(new Error(`User with id: ${id} was not found`))
+    expect(user)
+      .rejects.toThrow(`User with id: ${id} was not found`)
+
   })
 })
 
@@ -35,22 +44,17 @@ describe('The findUserByEmail function', () => {
 
     findUserByEmail(email).then(response => {
       const expectedMessage = `User with email: ${email} was found successfully`;
-      assert.equal(response.message, expectedMessage);
+      expect(response.message).toEqual(expectedMessage)
       
       done();
     })
   })
 
-  it('should rejects with error if user email was not found (Using async/await)',  async () => {
+  it('should rejects with error if user email was not found',  async () => {
     const email = 'www@qqq.com';
     const expectedErrorMessage = `Error with email: ${email} was not found`;
-    
-    try {
-      await findUserByEmail(email);
-      assert.fail('Expect findUserByEmail function to reject');
-    } catch (error) {
-      assert.equal(error.message, expectedErrorMessage);
-    }
 
+    await expect(findUserByEmail(email))
+      .rejects.toThrow(expectedErrorMessage)
   })
 })

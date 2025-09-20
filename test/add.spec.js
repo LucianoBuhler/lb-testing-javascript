@@ -1,5 +1,4 @@
 const add = require('../add');
-const assert = require('assert');
 
 describe('The add function', () => {
   it('should correctly add two numbers', () => {
@@ -7,7 +6,7 @@ describe('The add function', () => {
 
     const expected = 4;
 
-    assert.equal(actual, expected);
+    expect(actual).toBe(expected);
   });
 })
 
